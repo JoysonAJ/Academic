@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SubtractionFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <EditText
+        android:id="@+id/n1"
+        android:layout_width="190dp"
+        android:layout_height="57dp"
+        android:layout_gravity="top"
+        android:inputType="number"
+        android:hint="Enter the Number1"
+        android:textAlignment="center"
+        tools:ignore="RtlCompat" />
+
+    <EditText
+        android:id="@+id/n2"
+        android:layout_width="201dp"
+        android:layout_height="55dp"
+        android:layout_gravity="end"
+        android:inputType="number"
+        android:hint="Enter the NUmber 2"
+        android:textAlignment="center"
+        tools:ignore="RtlCompat" />
+
+    <Button
+        android:id="@+id/BtnSub"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:text=" SUB "/>
+
+    <EditText
+        android:id="@+id/ans"
+        android:layout_width="match_parent"
+        android:inputType="number"
+        android:layout_height="58dp"
+        android:layout_gravity="bottom"/>
+
+</FrameLayout>
