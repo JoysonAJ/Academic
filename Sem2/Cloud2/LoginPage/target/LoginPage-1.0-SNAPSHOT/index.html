@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <style>
+            table{
+                border: 2px solid black;
+                /* background-color: bisque; */
+                padding: 20px;
+            }
+            label{
+                color: red;
+                font-weight: bolder;
+                font-size: 1.5rem;
+            }
+            input{
+                width: 100% ;
+                padding: 5px;
+            }
+            .btn{
+                margin: 15px;
+                background-color: white;
+                padding: 5px;
+            }
+            .btnVal{
+                background-color: tomato;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="LoginServlet">
+        <div class="main">
+           <table>
+            <tr>
+                <th colspan="2">
+                    <h2>
+                        Login 
+                    </h2>
+                </th>
+            </tr>
+           <tr>
+                <td>
+                    <label>
+                        Username :
+                    </label>
+                </td>
+                <td>
+                    <input type="text" name="user" >
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label>
+                        Password :
+                    </label>
+                </td>
+                <td>
+                    <input type="password" name="pass" >
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="btn">
+                    <input type="submit" name="Submit" value="SUIBMIT" class="btnVal">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="btn">
+                    <input type="reset" name="Submit" value="RESET" class="btnVal">
+                </td>
+            </tr>
+            </table>
+        </div>
+        
+        </form>
+    </body>
+</html>

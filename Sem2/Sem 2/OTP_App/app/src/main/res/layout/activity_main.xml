@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Enter the OTP"
+        android:textSize="25dp"
+        android:layout_marginTop="250dp"
+        android:textAlignment="center"
+        android:background="@color/black"
+        android:textColor="@color/white"
+        />
+
+    <EditText
+        android:id="@+id/otp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/teal_700"
+        android:hint="Enter the OTP"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="50dp"/>
+
+
+</LinearLayout>

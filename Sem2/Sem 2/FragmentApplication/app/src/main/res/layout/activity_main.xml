@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="550dp">
+
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/Btn1"
+        android:layout_width="108dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="278dp"
+        android:layout_marginBottom="30dp"
+        android:text="ADD"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/Sub"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="98dp"
+        android:layout_marginEnd="175dp"
+        android:layout_marginBottom="33dp"
+        android:text="SUB"
+
+        />
+
+    <Button
+        android:id="@+id/Mul"
+        android:layout_width="108dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="192dp"
+        android:layout_marginEnd="93dp"
+        android:layout_marginBottom="29dp"
+        android:text="Mul" />
+
+    <Button
+        android:id="@+id/Div"
+        android:layout_width="108dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="278dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="32dp"
+        android:text="Div" />
+
+
+</RelativeLayout>

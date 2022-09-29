@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".SecondActivity2">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:textAlignment="center"
+        android:text="WELCOME"
+        android:textSize="30dp"/>
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:textColor="#B641F1"
+        android:layout_margin="25dp"
+
+        android:textAlignment="center"
+
+        />
+    <EditText
+        android:id="@+id/email2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:textColor="#B641F1"
+        android:layout_margin="25dp"
+
+        android:textAlignment="center"
+
+        />
+
+    <Button
+        android:id="@+id/logOut"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="40dp"
+        android:text="LOGOUT "
+        android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+/>
+
+
+</LinearLayout>

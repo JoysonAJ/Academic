@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+
+    <TextView
+        android:id="@+id/Data"
+        android:layout_width="403dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="68dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Num"
+        android:layout_width="410dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Data"
+        app:layout_constraintVertical_bias="0.018" />
+
+    <TableLayout
+        android:layout_width="417dp"
+        android:layout_height="471dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.865">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="77dp">
+
+            <Button
+                android:id="@+id/Percentage"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/Div"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/multiply"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/Clear"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/Seven"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/Eight"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/Nine"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+
+
+            <Button
+                android:id="@+id/Minus"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/Four"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/Five"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/Six"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/Add"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="16dp" >
+
+            <Button
+                android:id="@+id/one"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/Two"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/Three"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/Equal"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="Button" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/Zero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+        </TableRow>
+
+
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

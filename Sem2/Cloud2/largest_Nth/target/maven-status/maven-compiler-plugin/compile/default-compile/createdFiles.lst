@@ -1,0 +1,3 @@
+largest_nth_servlet.class
+com\mycompany\largest_nth\JakartaRestConfiguration.class
+com\mycompany\largest_nth\resources\JakartaEE9Resource.class
