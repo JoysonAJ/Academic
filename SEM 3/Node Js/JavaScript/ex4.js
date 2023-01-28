@@ -8,6 +8,7 @@ const result = () =>{
             obj[str[i]] = 1;
         }
     }
+
     document.getElementById("res").innerHTML=obj[str]
     for(let i = 0; i < str.length; i++) {
         document.write(str[i]+"\t"+obj[str[i]] +"\t")

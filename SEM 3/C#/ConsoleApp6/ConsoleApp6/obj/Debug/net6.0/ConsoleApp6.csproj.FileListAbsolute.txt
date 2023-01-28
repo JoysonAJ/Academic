@@ -1,0 +1,15 @@
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\bin\Debug\net6.0\ConsoleApp6.exe
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\bin\Debug\net6.0\ConsoleApp6.deps.json
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\bin\Debug\net6.0\ConsoleApp6.runtimeconfig.json
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\bin\Debug\net6.0\ConsoleApp6.dll
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\bin\Debug\net6.0\ConsoleApp6.pdb
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\obj\Debug\net6.0\ConsoleApp6.csproj.AssemblyReference.cache
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\obj\Debug\net6.0\ConsoleApp6.GeneratedMSBuildEditorConfig.editorconfig
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\obj\Debug\net6.0\ConsoleApp6.AssemblyInfoInputs.cache
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\obj\Debug\net6.0\ConsoleApp6.AssemblyInfo.cs
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\obj\Debug\net6.0\ConsoleApp6.csproj.CoreCompileInputs.cache
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\obj\Debug\net6.0\ConsoleApp6.dll
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\obj\Debug\net6.0\refint\ConsoleApp6.dll
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\obj\Debug\net6.0\ConsoleApp6.pdb
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\obj\Debug\net6.0\ConsoleApp6.genruntimeconfig.cache
+E:\COLLEGE\Academic\SEM 3\C#\ConsoleApp6\ConsoleApp6\obj\Debug\net6.0\ref\ConsoleApp6.dll
