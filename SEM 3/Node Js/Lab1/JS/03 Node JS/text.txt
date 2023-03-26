@@ -1,0 +1,2 @@
+This Program is read and write file
+ Append word
