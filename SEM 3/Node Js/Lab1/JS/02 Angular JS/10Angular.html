@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular 10 </title>
+  <script src="angular-1.8.2/angular.js"></script>
+  <script>
+    var app = angular.module("myApp", [])
+    app.controller('myController', function ($scope,hexafy){
+      $scope.t1 = 255
+      $scope.convHexa = function (){
+        $scope.hexd = hexafy.myFun(parseInt($scope.t1))
+      }
+    })
+
+    app.service("hexafy",function (){
+      this.myFun = function (x){
+        return x.toString(16).toUpperCase();
+      }
+    })
+  </script>
+</head>
+<body ng-app="myApp" >
+  <p ng-controller="MyController" >
+    Enter the Decimal result : <input type="text" name="t1" ng-model="t1"/>
+    <br>
+    <input type="button"  ng-click="convHexa()" value="Convert"/>
+    <br>
+    Result is : {{hexd}}
+  </p>
+
+</body>
+</html>

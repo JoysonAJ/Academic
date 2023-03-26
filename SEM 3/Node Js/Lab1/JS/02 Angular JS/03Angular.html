@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular 03</title>
+    <script src="./angular-1.8.2/angular.js"></script>
+</head>
+<body ng-app ng-init="checked=true">
+  <p>
+    Click me : <input type="checkbox" ng-model="checked">
+  </p>
+
+<p>
+  New :<input type="text" ng-if="checked"/>
+</p>
+
+<p>
+    Read only : <input type="text" ng-readonly="checked" value="This is read only" />
+</p>
+
+<p>
+    Disabled : <input type="text" ng-disabled="checked" value="This is disabled one"/>
+</p>
+
+</body>
+</html>

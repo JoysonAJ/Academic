@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular-1.8.2/angular.js"></script>
+    <script>
+        let app = angular.module('myApp',[])
+        app.controller('myController',function ($scope){
+            $scope.items = ["item7","item2","item4","item0"]
+            $scope.delItem = function (n){
+                $scope.items.splice(n,1)
+            }
+            $scope.addItem = function (n){
+                $scope.items.push($scope.it1);
+            }
+            $scope.revItem = function (){
+                $scope.items.reverse();
+            }
+            $scope.sortItem = function (){
+                $scope.items.sort();
+            }
+        })
+    </script>
+</head>
+<body ng-app="myApp">
+   <div ng-controller="myController">
+       <ol>
+           <li ng-repeat="x in items"> {{ x }} </li>
+       </ol>
+       <br>
+       Enter item to inserted : <input type="text" ng-model="it1"/>
+       <button ng-click="addItem()">Insert</button>
+       <button ng-click="delItem($index)">delete</button>
+       <button ng-click="revItem()">Reverse</button>
+       <button ng-click="sortItem()">SORT</button>
+   </div>
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Angular 6</title>
+    <script src="angular-1.8.2/angular.js"></script>
+    <script>
+        let app = angular.module("myApp", [])
+        app.controller("myController1", function ($scope, $rootScope){
+            $scope.msg = "AIMIT";
+            $rootScope.mainMsg="Beeri,Mangalore"
+        })
+        app.controller("myController2", function ($scope ){
+            $scope.msg = "ALOYSIUS";
+        })
+        app.controller("myController3", function ($scope ){
+
+        })
+    </script>
+</head>
+<body ng-app="myApp">
+
+    <div ng-controller="myController1">
+        <p>{{msg}}</p>
+        <p>{{mainMsg}}</p>
+    </div>
+
+    <br>
+    <div ng-controller="myController2">
+        <p>{{msg}}</p>
+        <p>{{mainMsg}}</p>
+    </div>
+
+    <br>
+    <div ng-controller="myController3">
+        <p>{{msg}}</p>
+        <p>{{mainMsg}}</p>
+    </div>
+
+    <br>
+
+
+
+</body>
+</html>

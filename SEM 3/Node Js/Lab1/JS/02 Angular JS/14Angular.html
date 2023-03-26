@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Angular 13</title>
+  <script src="angular-1.8.2/angular.js"></script>
+  <script src="angular-1.8.2/angular-messages.js"></script>
+  <script>
+    let app = angular.module("myApp",['ngMessage']);
+  </script>
+
+</head>
+<body ng-app="myApp">
+<form name="myForm">
+  <label>
+    Enter the name:
+  </label>
+  <input type="text" name="firstName" ng-model="firstName" required/>
+  <span style="color: red" ng-show="myForm.fName.$error.required">
+      This field is required
+    </span>
+  <br>
+  <label>
+    Enter the Address:
+  </label>
+  <textarea ng-model="address" name="add" ng-minlength="20" ng-maxlength="50"></textarea>
+  <span style="color: red" ng-show="myForm.add.$error.minlength">
+      20 character required
+    </span>
+  <span style="color: red" ng-show="myForm.add.$error.maxlength">
+      below 50 character allowed
+    </span>
+  <br>
+
+</form>
+
+</body>
+</html>

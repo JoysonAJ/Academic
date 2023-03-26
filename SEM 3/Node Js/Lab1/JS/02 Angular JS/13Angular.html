@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular 13</title>
+  <script src="angular-1.8.2/angular.js"></script>
+</head>
+<body ng-app>
+    <textarea ng-focus="count=count+1">AIMIT</textarea>
+      {{count}}
+      <br>
+      <h3 ng-dblclick="count =count+1" ng-init="count=0">
+        dbclick demo
+      </h3>
+
+<h3>
+  Focus on key <input ng-focus="count =count+1" ng-init="count=0" type="text">
+</h3>
+
+<br>
+<h3>
+  Press down key : <input type="text" ng-keydown="count =count+1" ng-init="count=0"/>
+</h3>
+<br>
+<h3>
+  press Any key :<input type="text" ng-keypress="count =count+1" ng-init="count=0"/>
+</h3>
+<br>
+<h3>
+  Press up key : <input type="text" ng-keyup="count =count+1" ng-init="count=0">
+</h3>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Angular 11 </title>
+  <script src="angular-1.8.2/angular.min.js"></script>
+  <script>
+    var app = angular.module("myApp", [])
+    app.service("Arthmatic",function (){
+      this.addNo=function (x,y){
+        x = parseInt(x);
+        y = parseInt(y);
+        return x+y;
+      }
+      this.subNo= function (x,y){
+        return (parseInt(x)-parseInt(y));
+      }
+    })
+
+    app.controller("myController",function ($scope,Arthmatic){
+      $scope.addNumber = function (){
+              $scope.result = Arthmatic.addNo($scope.t1,$scope.t2)
+      }
+      $scope.subNumber = function (){
+              $scope.result = Arthmatic.subNo($scope.t1,$scope.t2)
+      }
+    })
+  </script>
+
+</head>
+<body ng-app="myApp" ng-controller="myController">
+  <p >
+    <br>
+    <input type="text" ng-model="t1" name="t1"><br>
+    <input type="text" ng-model="t2" name="t2"><br>
+    <button ng-click="addNumber()">
+      ADD
+    </button>
+    <br>
+    <br>
+    <button ng-click="subNumber()">
+      SUB
+    </button>
+    <br>
+    <h1>
+    {{result}}
+  </h1>
+
+  </p>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Angular 4</title>
+    <script src="angular-1.8.2/angular.js"></script>
+    <script>
+        let app = angular.module("myApp", [])
+        app.directive("myDirective", function () {
+            return {
+                restrict: "EA",
+                replace: true,
+                template: "<H1>HELLO WORLD</H1>"
+            }
+        });
+    </script>
+</head>
+<body ng-app="myApp">
+    <br>
+    <p>
+        Element name:<my-directive></my-directive>
+    </p>
+
+    <p>
+        Attribute name : <div my-Directive></div>
+    </p>
+
+</body>
+</html>

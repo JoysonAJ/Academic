@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular 9</title>
+    <script src="angular-1.8.2/angular.js"></script>
+    <script>
+        var app = angular.module("myApp", [])
+        app.controller('myController', function ($scope, $location, $timeout, $interval) {
+            $scope.curTime = new Date();
+            $timeout(function () {
+                $scope.myHeader = "How are you ?"
+            }, 2000);
+            $interval(function () {
+                $scope.curTime = new Date()
+            }, 2000)
+        })
+    </script>
+</head>
+<body ng-app="myApp">
+<p ng-controller="myController">
+    {{myHeader}}
+    {{curTime}}
+</p>
+</body>
+</html>

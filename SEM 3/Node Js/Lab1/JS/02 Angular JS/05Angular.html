@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Angular 5</title>
+  <script src="angular-1.8.2/angular.js"></script>
+  <script>
+    let app = angular.module("myApp",[])
+    app.controller('myController',function ($scope){
+      $scope.message = "HELLO WORLD"
+    })
+  </script>
+</head>
+<body ng-app="myApp">
+    <h3 ng-controller="myController">
+      {{message}}
+    </h3>
+
+</body>
+</html>

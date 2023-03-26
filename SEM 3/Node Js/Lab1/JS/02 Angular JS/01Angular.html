@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angular 1</title>
+    <script src="./angular-1.8.2/angular.js"></script>
+    <script>
+        const myApp = angular.module("myApp",[])
+        myApp.controller('myController1',function ($scope){
+            $scope.custName = "customer1"
+            $scope.custCode = 1234
+            $scope.showMsg = function (msg){
+                alert(msg)
+            }
+        });
+        myApp.controller("myController2",function($scope){
+            $scope.custName = "customer2"
+            $scope.custCode = 5678
+            $scope.showMsg = function (msg){
+                alert(msg)
+            }
+        })
+    </script>
+</head>
+<body>
+    <body ng-app="myApp">
+    <div ng-controller="myController1">
+        Customer name :<input type="text" ng-model="custName"/>
+        <br>
+        Customer-code :<input type="text" ng-model="custCode"/>
+        <br>
+        {{ custName}} &nbsp {{custCode}}
+        <br>
+        <input type="button" value="Click" ng-click="showMsg(custName)">
+    </div>
+    <div ng-controller="myController2">
+        Customer name :<input type="text" ng-model="custName"/>
+        <br>
+        Customer-code :<input type="text" ng-model="custCode"/>
+        <br>
+        {{ custName}} &nbsp {{custCode}}
+        <br>
+        <input type="button" value="Click" ng-click="showMsg(custName)">
+    </div>
+
+    </body>
+</body>
+</html>

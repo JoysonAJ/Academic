@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular 7 </title>
+  <script src="angular-1.8.2/angular.js"></script>
+</head>
+<body ng-app>
+        Enter Amount : <input type="text" ng-model="amount"/>
+          <br>
+        number : 4 {{1111 | number}}<br>
+        number | number = {{amount | number}}<br>
+        Number 4 {{amount |number:4}}<br>
+        Number 6 {{amount |number:6}}<br>
+
+      <div ng-init="kk=['sanya','Shree','sam'];student=[
+                        { name:'Joy',marks:'88',course:'MCA'},
+                        { name:'Ram',marks:'68',course:'MBA'},
+                        { name:'Sham',marks:'98',course:'Msc'}
+
+                        ]">
+
+          <p>
+              Ascending order marks
+          </p>
+         <ul>
+             <li ng-repeat="x in student | orderBy:'marks'" >
+                    {{x.name}}
+             </li>
+         </ul>
+          <br>
+          <p>
+              Enter the course <input type="text" ng-model="cCourse"/>
+              <br>
+          <li ng-repeat="x in student | filter:cCourse" >
+              {{x.name}}
+          </li>
+          </p>
+      </div>
+</body>
+</html>

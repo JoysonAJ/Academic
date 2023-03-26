@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular 12 </title>
+    <script src="angular-1.8.2/angular.js">
+    </script>
+  <script>
+    var app = angular.module("myApp", [])
+    app.controller("myController",function ($scope){
+      $scope.count = 0;
+      $scope.myFunction = function (){
+        $scope.count +=1
+      }
+    })
+  </script>
+</head>
+<body ng-app="myApp">
+  <div ng-controller="myController">
+    <textarea ng-focus="count =count+1">AIMIT</textarea>
+    <h1>{{count}}</h1>
+    <h3 ng-mouseover="count =count+1">
+      Mouse Over
+    </h3>
+    <br>
+    <h3 ng-mouseenter="count =count+1">
+      Mouse center
+    </h3>
+    <br>
+    <h3 ng-mousemove="count =count+1">
+      Mouse MOve
+    </h3>
+    <br>
+    <h3 ng-mouseleave="count =count+1">
+      Mouse leave
+    </h3>
+    <br>
+    <h3 ng-mousedown="count =count+1">
+      Mouse Down
+    </h3>
+    <br>
+    <h3 ng-mouseup="count =count+1">
+      Mouse up
+    </h3>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title> Angular 16</title>
+    <script src="angular-1.8.2/angular.js"></script>
+    <script>
+        var app = angular.module("myApp",[])
+        app.controller("myController",function ($scope,$http){
+            $http.get("index.html").then(function (response){
+                $scope.myResponse = response.data
+            },function (response){
+                $scope.myResponse = "eror"
+            })
+        })
+    </script>
+</head>
+<body ng-app="myApp">
+    <p ng-controller="myController">
+        {{myResponse}}
+    </p>
+
+</body>
+</html>

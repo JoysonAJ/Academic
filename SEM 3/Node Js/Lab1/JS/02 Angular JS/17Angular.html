@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Angular 17</title>
+    <script src="angular-1.8.2/angular.js"></script>
+    <script>
+        var app = angular.module("myApp",[])
+        app.controller("myController",function ($scope,$http){
+            let url = "data.json";
+            $http.get(url).then(function (response){
+                $scope.students = response.data;
+            }),function (response){
+                $scope.data = "error"
+            }
+        })
+    </script>
+</head>
+<body ng-app="myApp">
+    <div ng-controller="myController">
+        <div>
+            {{students}}
+        </div>
+
+        <div>
+            <table border="1">
+                <tr>
+                    <th>NAME</th>
+                    <th>ADDR</th>
+                </tr>
+
+                <tr ng-repeat="st in students">
+                    <td>{{st.name}}</td>
+                    <td>{{st.add}}</td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

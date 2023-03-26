@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular 7</title>
+  <script src="angular-1.8.2/angular.js"></script>
+  <script>
+    var app = angular.module("myApp",[])
+    app.filter("myFilter",function (){
+      return function (inputText){
+        var i,text,c;
+        text="";
+        for(i=0;i<inputText.length;i++){
+          c = inputText[i]
+          if(i%2 == 0){
+            c = c.toUpperCase()
+          }else{
+            c= c.toLowerCase()
+          }
+          text += c;
+        }
+        return text
+      }
+    })
+  </script>
+</head>
+<body ng-app="myApp">
+    <p ng-init="cityName=['manglore','Banglore']">
+      <ul>
+      <li ng-repeat="c in cityName">
+        {{c |myFilter}}
+      </li>
+    </ul>
+    </p>
+
+</body>
+</html>

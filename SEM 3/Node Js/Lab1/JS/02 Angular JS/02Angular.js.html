@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular 2</title>
+  <script src="angular-1.8.2/angular.js">
+
+  </script>
+</head>
+<body ng-app>
+    <div ng-init="arrayNumber=[100,200,300,400];
+                  emaployees=[
+                  {fName:'Akhil',lName:'Sharma'},
+                  {fName:'Rashmi',lName:'Shetty'}
+                  ]">
+        <table border="1" >
+          <tr>
+            <th>
+              fName
+            </th>
+            <th>
+              lName
+            </th>
+          </tr>
+
+          <tr ng-repeat="e in emaployees">
+              <td ng-if="$even" style="background: #2a6496">
+                {{e.fName}}
+              </td>
+            <td ng-if="$even" style="background: #c9e2b3">
+                {{e.lName}}
+              </td>
+
+            <td ng-if="$odd" style="background: springgreen">
+              {{e.fName}}
+            </td>
+            <td ng-if="$odd" style="background: orange">
+              {{e.lName}}
+            </td>
+          </tr>
+        </table>
+    </div>
+
+</body>
+</html>

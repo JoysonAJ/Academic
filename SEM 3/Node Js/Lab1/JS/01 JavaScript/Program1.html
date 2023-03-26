@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        Calculator......
+    </title>
+    <script>
+        const numberClick = (a) =>{
+            inputNumber = a;
+            calForm.inputValue.value = a;
+        }
+
+        const clearInput = () =>{
+            inputNumber = 0;
+            previousValue = 0;
+            calForm.inputValue.value = 0;
+        }
+
+        let previousValue;
+        let opr;
+        const setOperator = (op) =>{
+            opr = op;
+            previousValue = inputNumber;
+            console.log(op);
+            console.log(previousValue);
+        }
+
+        const perFormOpr = () =>{
+            const value1 = previousValue;
+            const value2 = inputNumber;
+            const operator = opr;
+
+        switch(operator){
+            case '+':
+                calForm.inputValue.value = value1+value2;
+                break;
+            case '-':
+                calForm.inputValue.value = value1-value2;
+                break;
+            case '*':
+                calForm.inputValue.value = value1*value2;
+                break;
+            case '/':
+                calForm.inputValue.value = value1/value2;
+                break;
+        }
+}
+    </script>
+    <!-- <script src="./js1.js"></script> -->
+</head>
+<body>
+    <form name="calForm">
+        <table>
+            <tr>
+                <td colspan="3">
+                    <input type="text" name="inputValue" id="inputValId" value="0"/>
+                </td>
+                <td>
+                    <input type="button" value="CE" onclick="clearInput()"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="button" value="7" onclick="numberClick(7)">
+                </td>
+
+                <td>
+                    <input type="button" value="8" onclick="numberClick(8)">
+                </td>
+
+                <td>
+                    <input type="button" value="9" onclick="numberClick(9)">
+                </td>
+
+                <td>
+                    <input type="button" value="/" onclick="setOperator('/')">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="button" value="4" onclick="numberClick(4)">
+                </td>
+
+                <td>
+                    <input type="button" value="5" onclick="numberClick(5)">
+                </td>
+
+                <td>
+                    <input type="button" value="6" onclick="numberClick(6)">
+                </td>
+
+                <td>
+                    <input type="button" value="*" onclick="setOperator('*')">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="button" value="1" onclick="numberClick(1)">
+                </td>
+
+                <td>
+                    <input type="button" value="2" onclick="numberClick(2)">
+                </td>
+
+                <td>
+                    <input type="button" value="3" onclick="numberClick(3)">
+                </td>
+
+                <td>
+                    <input type="button" value="-" onclick="setOperator('-')">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" >
+                    <input type="button" value="0" onclick="numberClick(0)">
+                </td>
+
+                <td>
+                    <input type="button" value="+" onclick="setOperator('+')">
+                </td>
+
+                <td>
+                    <input type="button" value="=" onclick="perFormOpr()">
+                </td>
+            </tr> 
+
+            
+        </table>
+    </form>
+</html>
