@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="411dp"
+    android:orientation="vertical"
+    android:layout_marginTop="29dp"
+    tools:context=".Sub">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/num1"
+        android:hint="Enter the number 1"/>
+
+    <EditText
+        android:id="@+id/num2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:hint="Enter the number 2" />
+
+    <Button
+        android:id="@+id/subNumber"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="Sub"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        />
+
+    <EditText
+        android:id="@+id/ans"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        />
+
+</LinearLayout>

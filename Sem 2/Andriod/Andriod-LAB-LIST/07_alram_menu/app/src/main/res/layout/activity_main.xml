@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="10dp"
+    android:focusable="false"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+  <EditText
+      android:id="@+id/dateInput"
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:layout_marginStart="5dp"
+      android:layout_marginLeft="5dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="5dp"
+      android:layout_marginRight="5dp"
+      android:layout_marginBottom="10dp"
+      android:focusable="false"
+      android:hint="Choose a date"
+      android:inputType="date"
+      android:textAlignment="center" />
+
+  <EditText
+      android:id="@+id/timeInput"
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:layout_marginStart="5dp"
+      android:layout_marginLeft="5dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="5dp"
+      android:layout_marginRight="5dp"
+      android:layout_marginBottom="10dp"
+      android:focusable="false"
+      android:hint="Choose a time"
+
+      android:inputType="time"
+      android:textAlignment="center" />
+
+  <Button
+      android:id="@+id/alramBtn"
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:layout_marginStart="5dp"
+      android:layout_marginLeft="5dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="5dp"
+      android:layout_marginRight="5dp"
+      android:layout_marginBottom="10dp"
+
+      android:text="Set Alaram" />
+
+</LinearLayout>

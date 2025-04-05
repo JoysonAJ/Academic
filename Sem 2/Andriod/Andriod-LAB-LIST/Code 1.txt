@@ -1,0 +1,614 @@
+1.	Android App to demonstrate Basic Controls, taking user input, Event Handling, Intent and List View by generating Fibonacci series.
+
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
+    
+    <EditText
+        android:id="@+id/InputData"
+        android:layout_width="326dp"
+        android:layout_height="85dp"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="268dp"
+        android:hint="Enter the Number Limit"
+        android:textAlignment="center"
+        android:textColor="#0E0D0D"
+        android:textColorHint="#0E0D0D"
+        />
+
+    <Button
+        android:id="@+id/fiboButton"
+        android:layout_width="291dp"
+        android:layout_height="98dp"
+        android:layout_margin="25dp"
+        android:text="Genrate Fibonoci"
+        />
+
+</LinearLayout>
+
+ 
+ 
+MainActivity.java
+package com.example.a01_fibonoci;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+    EditText inputText;
+    Button fiboButton;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        inputText = findViewById(R.id.InputData);
+        fiboButton = findViewById(R.id.fiboButton);
+
+        fiboButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int numberLimit = Integer.parseInt(inputText.getText().toString());
+
+                Intent nextPage = new Intent(MainActivity.this,Second.class);
+                nextPage.putExtra("limitFibo",numberLimit);
+                startActivity(nextPage);
+            }
+        });
+    }
+}
+activity_second.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Second">
+
+    <ListView
+        android:id="@+id/fiboViewList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</LinearLayout>
+
+ 
+
+package com.example.a01_fibonoci;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Second extends AppCompatActivity {
+
+    int[] fiboSeries;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_second);
+
+        int fiboLimit = getIntent().getIntExtra("limitFibo", 1);
+        fiboSeries = new int[fiboLimit];
+
+        fiboSeries[0] = 0;
+        fiboSeries[1] = 1;
+        for (int i = 2; i < fiboLimit; i++) {
+            fiboSeries[i] = fiboSeries[i - 1] + fiboSeries[i - 2];
+        }
+
+        List<Integer> fiboNumbers = new ArrayList<>();
+        for (int i = 0; i < fiboLimit; i++) {
+            fiboNumbers.add(fiboSeries[i]);
+        }
+
+        ListView listView = findViewById(R.id.fiboViewList);
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_list_item_1, fiboNumbers);
+        listView.setAdapter(adapter);
+    }
+}
+ 
+________________________________________________________________________________________________________________________
+2.	Android App to demonstrate Fragments using a Simple Calculator.
+
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/FrameLayout"
+        android:layout_width="410dp"
+        android:layout_height="433dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.006" />
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="140dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="28dp"
+        android:text="ADD"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.723" />
+
+    <Button
+        android:id="@+id/subBtn"
+        android:layout_width="158dp"
+        android:layout_height="63dp"
+        android:layout_marginBottom="16dp"
+        android:text="SUB"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.845"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.737" />
+
+    <Button
+        android:id="@+id/mulBtn"
+        android:layout_width="158dp"
+        android:layout_height="63dp"
+        android:text="Mul"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.889" />
+
+    <Button
+        android:id="@+id/div"
+        android:layout_width="158dp"
+        android:layout_height="63dp"
+        android:text="Div"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.845"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.857" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package com.example.a02_fragment_calculator;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    Button Add, sub, multiply, divBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Add = findViewById(R.id.add);
+        sub = findViewById(R.id.subBtn);
+        multiply = findViewById(R.id.mulBtn);
+        divBtn = findViewById(R.id.div);
+
+        Add.setOnClickListener(this);
+        sub.setOnClickListener(this);
+        multiply.setOnClickListener(this);
+        divBtn.setOnClickListener(this);
+    }
+
+    private void TransformFragment(Fragment Fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.FrameLayout, Fragment).commit();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == multiply)
+            TransformFragment(new Mul());
+        else if (v == divBtn)
+            TransformFragment(new Div());
+        else if (v == Add)
+            TransformFragment(new Addition());
+        else if (v == sub)
+            TransformFragment(new Sub());
+    }
+}
+
+
+fragment_addition.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="411dp"
+    android:orientation="vertical"
+    android:layout_marginTop="29dp"
+    tools:context=".Addition">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/num1"
+        android:hint="Enter the number 1"/>
+
+    <EditText
+        android:id="@+id/num2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:hint="Enter the number 2" />
+
+    <Button
+        android:id="@+id/addNum"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="ADD"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        />
+
+    <EditText
+        android:id="@+id/ans"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        />
+
+</LinearLayout>
+
+ 
+
+Addition.java
+package com.example.a02_fragment_calculator;
+
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class Addition extends Fragment {
+
+    View view;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_addition, container, false);
+
+        EditText num1,num2,res;
+        Button add;
+
+        num1 = view.findViewById(R.id.num1);
+        num2 =view.findViewById(R.id.num2);
+        res = view.findViewById(R.id.ans);
+
+        add = view.findViewById(R.id.addNum);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int numb1 = Integer.parseInt(num1.getText().toString());
+                int numb2 = Integer.parseInt(num2.getText().toString());
+                res.setText(" " + (numb1 + numb2));
+            }
+        });
+        return view;
+    }
+}
+ 
+fragment_sub.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="411dp"
+    android:orientation="vertical"
+    android:layout_marginTop="29dp"
+    tools:context=".Sub">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/num1"
+        android:hint="Enter the number 1"/>
+
+    <EditText
+        android:id="@+id/num2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:hint="Enter the number 2" />
+
+    <Button
+        android:id="@+id/subNumber"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="Sub"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        />
+
+    <EditText
+        android:id="@+id/ans"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        />
+
+</LinearLayout>
+
+ 
+
+package com.example.a02_fragment_calculator;
+
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+
+public class Sub extends Fragment {
+
+   View view;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_sub, container, false);
+
+        EditText num1,num2,res;
+        Button add;
+
+        num1 = view.findViewById(R.id.num1);
+        num2 =view.findViewById(R.id.num2);
+        res = view.findViewById(R.id.ans);
+
+        add = view.findViewById(R.id.subNumber);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int numb1 =Integer.parseInt(num1.getText().toString());
+                int numb2 =Integer.parseInt(num2.getText().toString());
+                res.setText(" "+(numb1-numb2) );
+            }
+        });
+
+        return view;
+    }
+}
+
+ ------------------------------------------------------------------------------------------------------------
+
+3.	Android App to demonstrate Services using a Simple Audio Player.
+
+
+AndroidManifest.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.a03_music_player">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.03_music_player"
+        tools:targetApi="31">
+
+-------------------------------------------------------
+        <service
+            android:name=".MyMusic"
+            android:enabled="true"
+            android:exported="true"></service>
+---------------------------------------------------
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:text="Start"
+        android:id="@+id/startMusic"
+        />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:layout_margin="50dp"
+        android:text="STOP"
+        android:id="@+id/stopMusic"/>
+
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+MainActivity.java
+
+package com.example.a03_music_player;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    Button startMusic,stopMusic;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        startMusic = findViewById(R.id.startMusic);
+        stopMusic = findViewById(R.id.stopMusic);
+
+        startMusic.setOnClickListener(this);
+        stopMusic.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == startMusic){
+            Toast.makeText(this, "Music Started", Toast.LENGTH_LONG).show();
+            startService(new Intent(this,MyMusic.class));
+        }
+        else{
+            Toast.makeText(this, "Music Stoped", Toast.LENGTH_LONG).show();
+            stopService(new Intent(this,MyMusic.class));
+        }
+    }
+}
+
+Mymusic.java (Service)
+
+package com.example.a03_music_player;
+
+import android.app.Service;
+import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.IBinder;
+
+public class MyMusic extends Service {
+    MediaPlayer mediaPlayer;
+    public MyMusic() {
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+//	mediaPlayer = MediaPlayer.create(this,R.raw.music);
+
+//        if don't have music audio then choose the default ringtone
+
+        mediaPlayer =MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
+
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.stop();
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        // TODO: Return the communication channel to the service.
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+}
+
+============================================================================================================================
+ 

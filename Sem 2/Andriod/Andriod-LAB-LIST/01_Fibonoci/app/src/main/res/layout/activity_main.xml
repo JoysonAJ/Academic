@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/InputData"
+        android:layout_width="326dp"
+        android:layout_height="85dp"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="268dp"
+        android:hint="Enter the Number Limit"
+        android:textAlignment="center"
+        android:textColor="#0E0D0D"
+        android:textColorHint="#0E0D0D"
+        />
+
+    <Button
+        android:id="@+id/fiboButton"
+        android:layout_width="291dp"
+        android:layout_height="98dp"
+        android:layout_margin="25dp"
+        android:text="Genrate Fibonoci"
+        />
+
+</LinearLayout>

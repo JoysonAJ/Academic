@@ -1,0 +1,736 @@
+4.	Android App to demonstrate Permissions and Broadcast Receivers using OTP and usage of Telephony to trigger an SMS.
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="OTP APP"
+        android:textAlignment="center"
+        android:background="@color/black"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:padding="20sp"/>
+
+    <EditText
+        android:textAlignment="center"
+        android:id="@+id/otpField"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="30dp"
+        android:inputType="number"
+        android:padding="25dp" />
+
+</LinearLayout>
+
+ 
+
+AndroidManifest.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.a04_broadcast_otp_sms">
+
+------------------------------------------------------------------------
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+
+---------------------------------------------------------------------------
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.04_broadcast_OTP_SMS"
+        tools:targetApi="31">
+        <receiver
+            android:name=".smsReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+
+        </receiver>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+MainActivity.java
+
+package com.example.a04_broadcast_otp_sms;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+    smsReceiver smsReceiver;
+    EditText otpView;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        smsReceiver = new smsReceiver();
+
+        otpView = findViewById(R.id.otpField);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (checkSelfPermission(Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_SMS}, 0);
+            }
+        }
+
+        smsReceiver.setOTPEdit(otpView);
+    }
+}
+______________________________________________________________________________________________________
+smsReceiver.java
+
+package com.example.a04_broadcast_otp_sms;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.provider.Telephony;
+import android.telephony.SmsMessage;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class smsReceiver extends BroadcastReceiver {
+    private static EditText editOTP;
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+        SmsMessage[] messages = Telephony.Sms.Intents.getMessagesFromIntent(intent);
+        for(SmsMessage smsMessage:messages){
+            String smsText = smsMessage.getMessageBody();
+            String getOtp = smsText.split(":")[1];
+            editOTP.setText(getOtp);
+        }
+    }
+
+    public void setOTPEdit(EditText otpView) {
+        smsReceiver.editOTP = otpView;
+    }
+}
+
+  
+
+
+ ====================================================================================================================================================================================
+
+
+
+
+ 
+5.   Android App to demonstrate Content Providers Consumption using Contacts and the usage of, Menus.
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".MainActivity">
+
+    <ListView
+    android:id="@+id/listContact"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:padding="5dp"/>
+
+</LinearLayout>
+
+ 
+
+package com.example.a05_content_provide_and_menu;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity {
+
+    String contactName, contactNumber;
+    ArrayList<String> contacts;
+    Cursor cursor;
+
+    ListView contactListview;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        if (checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, 0);
+            Toast.makeText(MainActivity.this, "Permision Granted", Toast.LENGTH_LONG).show();
+        }
+        contactListview = findViewById(R.id.listContact);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        display_Contact();
+    }
+
+//Step 2 : Adding Menu to app
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item1:
+                Toast.makeText(this, "Item 1 is selected", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.item2:
+                Toast.makeText(this, "Item 2 is Selected", Toast.LENGTH_LONG).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+Step 2 : Adding Menu to app ends here
+
+
+    public void display_Contact() {
+        contacts = new ArrayList<String>();
+
+        cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
+
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                contactName = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                contactNumber = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+                String contactDetails = contactName + " \t " + contactNumber;
+                contacts.add(contactDetails);
+            }
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, contacts);
+        contactListview.setAdapter(adapter);
+    }
+}
+ 
+Step2: ADDING MENU TO APP
+
+Step1: Create Resource Directory
+
+ 
+
+
+ 
+Create Menu Resource File
+
+ 
+ 
+menu.xml
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item1"
+        android:title="item 1" />
+
+    <item
+        android:id="@+id/item2"
+        android:title="item 2"/>
+
+</menu>
+
+  ====================================================================================================================================================================================
+
+6   Android App to demonstrate Text to Speech, Google Speech Recognizer Intent using a Voice Notepad.
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:hint="Enter the text"
+        android:textSize="25dp"
+        android:textAlignment="center"
+        android:id="@+id/inputText"/>
+
+    <Button
+        android:id="@+id/btnSpeak"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:text="Read it Loud"/>
+
+    <Button
+        android:id="@+id/clearBtn"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:text="Clear text"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_margin="20dp"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
+    
+</LinearLayout>
+
+  
+
+package com.example.a06_text_to_speech;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+
+import java.util.ArrayList;
+import java.util.Locale;
+
+public class MainActivity extends AppCompatActivity {
+
+    private static final int RECOGNIZER_RESULT = 1;
+    EditText inputText;
+    Button readLoud, clearText;
+
+    TextToSpeech textToSpeech;
+
+
+
+    ImageView imageView;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        inputText = findViewById(R.id.inputText);
+        readLoud = findViewById(R.id.btnSpeak);
+        clearText = findViewById(R.id.clearBtn);
+
+        imageView = findViewById(R.id.imageView);
+
+        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status == TextToSpeech.SUCCESS){
+                    textToSpeech.setLanguage(Locale.ENGLISH);
+                }
+            }
+        });
+
+        readLoud.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = inputText.getText().toString();
+                textToSpeech.speak(text,TextToSpeech.QUEUE_FLUSH,null);
+            }
+        });
+
+        clearText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inputText.setText("");
+            }
+        });
+
+//        Image View using Google reconizer
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,Locale.ENGLISH);
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT," Speak Now ");
+                startActivityForResult(intent,RECOGNIZER_RESULT);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(data != null && resultCode == RESULT_OK){
+            /*      
+      ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+      String speechText = matches.get(0);
+      inputText.setText("");
+      inputText.setText(speechText); 
+      */
+
+            //            or
+
+            String speechText = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0);
+            inputText.setText("");
+            inputText.setText(speechText);
+        }
+    }
+}
+ 
+ ====================================================================================================================================================================================
+
+8. Android App to demonstrate System Services using Date, Time Pickers and setting an Alarm, with Notification, Ringtone and Vibration.
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="10dp"
+    android:focusable="false"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+  <EditText
+      android:id="@+id/dateInput"
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:layout_marginStart="5dp"
+      android:layout_marginLeft="5dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="5dp"
+      android:layout_marginRight="5dp"
+      android:layout_marginBottom="10dp"
+      android:focusable="false"
+      android:hint="Choose a date"
+      android:inputType="date"
+      android:textAlignment="center" />
+
+  <EditText
+      android:id="@+id/timeInput"
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:layout_marginStart="5dp"
+      android:layout_marginLeft="5dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="5dp"
+      android:layout_marginRight="5dp"
+      android:layout_marginBottom="10dp"
+      android:focusable="false"
+      android:hint="Choose a time"
+
+      android:inputType="time"
+      android:textAlignment="center" />
+
+  <Button
+      android:id="@+id/alramBtn"
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:layout_marginStart="5dp"
+      android:layout_marginLeft="5dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="5dp"
+      android:layout_marginRight="5dp"
+      android:layout_marginBottom="10dp"
+
+      android:text="Set Alaram" />
+
+</LinearLayout>
+
+
+
+
+ 
+
+AndroidManifest.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.a07_alram_menu">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.07_alram_menu"
+        tools:targetApi="31">
+        <receiver
+            android:name=".alaramReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+
+MainActivity.java
+
+package com.example.a07_alram_menu;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.AlarmManager;
+import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText dateText, timeText;
+    Button alarmButton;
+
+    DatePickerDialog datePickerDialog;
+    TimePickerDialog timePickerDialog;
+
+    Calendar calendar, calendarAlram;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        dateText = findViewById(R.id.dateInput);
+        timeText = findViewById(R.id.timeInput);
+        alarmButton = findViewById(R.id.alramBtn);
+
+        calendar = Calendar.getInstance();
+        calendarAlram = Calendar.getInstance();
+
+        dateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                datePickerDialog = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        calendarAlram.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        calendarAlram.set(Calendar.MONTH, month);
+                        calendarAlram.set(Calendar.YEAR, year);
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                        dateText.setText(dateFormat.format(calendarAlram.getTime()));
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
+        timeText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int min = calendar.get(Calendar.MINUTE);
+
+                timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        calendarAlram.set(Calendar.HOUR_OF_DAY,hourOfDay);
+                        calendarAlram.set(Calendar.MINUTE,minute);
+
+                        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa");
+
+                        timeText.setText(timeFormat.format(calendarAlram.getTime()));
+                    }
+                }, hour, min, false);
+                timePickerDialog.show();
+            }
+        });
+
+        alarmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,alaramReceiver.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this,123,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP,calendarAlram.getTimeInMillis(),pendingIntent);
+                Toast.makeText(MainActivity.this,"Alarm set "+calendarAlram.getTime().toString(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+}
+
+
+alaramReceiver.java
+
+package com.example.a07_alram_menu;
+
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.provider.Settings;
+import android.widget.Toast;
+
+import androidx.core.app.NotificationCompat;
+
+public class alaramReceiver extends BroadcastReceiver {
+    Vibrator vibrator;
+    NotificationManager notificationManager;
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+        Toast.makeText(context, "Alarm is Set up", Toast.LENGTH_LONG).show();
+
+//        Vibration
+        vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            vibrator.vibrate(VibrationEffect.createOneShot(2000, VibrationEffect.DEFAULT_AMPLITUDE));
+        else{
+            vibrator.vibrate(5000);
+        }
+
+//        RingTone play
+        Uri ringtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        MediaPlayer mp = MediaPlayer.create(context, ringtoneUri);
+        mp.start();
+
+//        Notification
+        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("MYChannel", "Reminders", NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(channel);
+        }
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse("www.google.com"));
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 123, i, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "MYChannel");
+        builder.setSmallIcon(android.R.drawable.alert_dark_frame)
+                .setContentTitle("My notification")
+                .setContentText("Alram Notification")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .setDefaults(Notification.DEFAULT_VIBRATE)
+                .setSound(ringtoneUri);
+
+
+        notificationManager.notify(546, builder.build());
+//        throw new UnsupportedOperationException("Not yet implemented");
+    }
+}
+
+ ====================================================================================================================================================================================
+
+9. Android App to find the Location of the Phone using GPS
+
+Incomplete
+
+9 Android App to demonstrate Drawer View, Images, audio, video and using the Camera of the Phone
+
+Incomplete
+ 
